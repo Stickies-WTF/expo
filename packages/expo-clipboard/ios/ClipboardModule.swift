@@ -59,6 +59,14 @@ public class ClipboardModule: Module {
       UIPasteboard.general.image = image
     }
 
+    AsyncFunction("setGifUriAsync") { (content: String) in
+      guard let url = URL(string: content) else {
+        throw InvalidImageException(content)
+      }
+      let data = try Data(contentsOf: url)
+      UIPasteboard.general.setData(data, forPasteboardType: "com.compuserve.gif")
+    }
+
     AsyncFunction("hasImageAsync") { () -> Bool in
       return UIPasteboard.general.hasImages
     }

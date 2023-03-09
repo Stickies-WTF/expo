@@ -173,7 +173,16 @@ export async function setImageAsync(base64Image: string): Promise<void> {
   if (!ExpoClipboard.setImageAsync) {
     throw new UnavailabilityError('Clipboard', 'setImageAsync');
   }
+
   return ExpoClipboard.setImageAsync(base64Image);
+}
+
+export async function setGifUriAsync(uri: string): Promise<void> {
+  if (!ExpoClipboard.setGifUriAsync) {
+    throw new UnavailabilityError('Clipboard', 'setGifUriAsync');
+  }
+
+  return ExpoClipboard.setGifUriAsync(uri);
 }
 
 /**
