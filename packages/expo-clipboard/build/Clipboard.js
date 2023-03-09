@@ -142,6 +142,38 @@ export async function setImageAsync(base64Image) {
     return ExpoClipboard.setImageAsync(base64Image);
 }
 /**
+ * Sets a gif image in the user's clipboard.
+ *
+ * @param base64Image Image encoded as a base64 string, without MIME type.
+ * @platform android
+ *
+ * @example
+ * ```tsx
+ * const result = await ImagePicker.launchImageLibraryAsync({
+ *   mediaTypes: ImagePicker.MediaTypeOptions.Images,
+ *   base64: true,
+ * });
+ * await Clipboard.setImageAsync(result.base64);
+ * ```
+ */
+export async function setGifImageAsync(base64Image) {
+    if (!ExpoClipboard.setImageAsync) {
+        throw new UnavailabilityError('Clipboard', 'setGifImageAsync');
+    }
+    return ExpoClipboard.setGifImageAsync(base64Image);
+}
+/**
+ * Sets a gif image in the user's clipboard from a uri.
+ *
+ * @platform ios
+ */
+export async function setGifUriAsync(uri) {
+    if (!ExpoClipboard.setGifUriAsync) {
+        throw new UnavailabilityError('Clipboard', 'setGifUriAsync');
+    }
+    return ExpoClipboard.setGifUriAsync(uri);
+}
+/**
  * Returns whether the clipboard has an image content.
  *
  * On web, this requires the user to grant your app permission to _"see text and images copied to the clipboard"_.
