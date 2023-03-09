@@ -1,6 +1,14 @@
 {
-  "name": "expo-clipboard",
+  "name": "@Stickies-WTF/expo-clipboard",
   "version": "4.1.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stickies-WTF/expo.git",
+    "directory": "packages/expo-clipboard"
+  },
+  "publishConfig": {
+    "@Stickies-WTF:registry": "https://npm.pkg.github.com"
+  },
   "description": "ExpoClipboard standalone module",
   "main": "build/Clipboard.js",
   "types": "build/Clipboard.d.ts",
@@ -18,11 +26,6 @@
     "expo",
     "expo-clipboard"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/expo/expo.git",
-    "directory": "packages/expo-clipboard"
-  },
   "bugs": {
     "url": "https://github.com/expo/expo/issues"
   },
