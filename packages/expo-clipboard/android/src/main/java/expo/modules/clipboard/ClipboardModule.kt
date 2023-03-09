@@ -102,6 +102,19 @@ class ClipboardModule : Module() {
       }
     }
 
+    AsyncFunction("setGifUriAsync") Coroutine { imageData: String ->
+      try {
+        val clip = gifClipDataFromBase64Image(context, imageData, clipboardCacheDir)
+        clipboardManager.setPrimaryClip(clip)
+      } catch (err: Throwable) {
+        err.printStackTrace()
+        throw when (err) {
+          is CodedException -> err
+          else -> CopyFailureException(err, kind = "image")
+        }
+      }
+    }
+
     AsyncFunction("hasImageAsync") {
       clipboardManager.primaryClipDescription?.hasMimeType("image/*") == true
     }

@@ -118,6 +118,35 @@ internal suspend fun clipDataFromBase64Image(
   )
   return ClipData.newUri(context.contentResolver, "image", imageUri)
 }
+
+internal suspend fun gifClipDataFromBase64Image(
+  context: Context,
+  base64Image: String,
+  clipboardCacheDir: File,
+): ClipData {
+  // 1. Decode base64 string to a ByteArray
+  val byteArray = Base64.decode(base64Image, Base64.DEFAULT)
+
+  // 2. Create file in cache dir, it will be overwritten if already exists
+  val file = File(clipboardCacheDir, "copied_image.gif").also {
+    it.ensureExists()
+  }
+
+  // 3. Write ByteArray to the file
+  val fileStream = runInterruptible { FileOutputStream(file, false) }
+  BufferedOutputStream(fileStream).use { outputStream ->
+    outputStream.write(byteArray)
+    runInterruptible { outputStream.flush() }
+  }
+
+  // 4. Get content:// URI to the image file and put it to the clipboard data
+  val imageUri = ClipboardFileProvider.getUriForFile(
+    context,
+    context.applicationInfo.packageName + ".ClipboardFileProvider",
+    file
+  )
+  return ClipData.newUri(context.contentResolver, "image", imageUri)
+}
 // endregion
 
 // region Utility functions
