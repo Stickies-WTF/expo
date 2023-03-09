@@ -102,7 +102,7 @@ class ClipboardModule : Module() {
       }
     }
 
-    AsyncFunction("setGifUriAsync") Coroutine { imageData: String ->
+    AsyncFunction("setGifImageAsync") Coroutine { imageData: String ->
       try {
         val clip = gifClipDataFromBase64Image(context, imageData, clipboardCacheDir)
         clipboardManager.setPrimaryClip(clip)
